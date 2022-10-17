@@ -1,14 +1,16 @@
 <?php
+session_start();
 if(isset($_POST['submit'])){
     $username = $_POST['fullname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
+    $_SESSION = $_POST['fullname'];
+    
 registerUser($username, $email, $password);
-
 }
 
 function registerUser($username, $email, $password){
+
     //save data into the file
     $data=array($username,$email,$password."</br>");
     $file = fopen('../storage/users.csv','a');

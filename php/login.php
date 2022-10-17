@@ -1,36 +1,51 @@
 <?php
+session_start();
 if(isset($_POST['submit'])){
-    $username = $_POST['email']; //finish this line
+    $email = $_POST['email']; //finish this line
     $password = $_POST['password'];//finish this
-    echo "$username.$password";
+    // $_SESSION['email'] = $getdata[1];
+
 loginUser($email, $password);
 }
 function loginUser($email, $password){
-    $file = fopen('../storage/users.csv','ra+');
-    if($file){
-        while ($getdata=fgetcsv($file)){
-            echo" $getdata[0].$getdata[1].$getdata[2]";
-            if ($getdata[1]== $email && $getdata[2]==$password){
+    $file = fopen('../storage/users.csv','r');
+        while (!feof($file)){
+            $getdata=fgetcsv($file);
+
+            if ($getdata[1]==$email && $getdata[2]==$password){
                 echo "
                 <script>
                 alert ('You have succesfully logged in');
-                // window.location.href='dashboard.php';
+                window.location.href='../dashboard.php';
                 </script>";
+                exit();
+            }
+            else if ($getdata[1]== $email && $getdata[2]!=$password){
+                echo "
+                <script>
+                alert ('Credentials do not match');
+                //window.location.href='../forms/login.html';
+                </script>";
+                exit();
             }
             else{
                 echo "
                 <script>
                  alert ('Incorrect credentials!');
-                //  window.location.href='../forms/login.html';
+                 //window.location.href='../forms/login.html';
                 </script>";
+                exit();
             }
-            fclose($file);
-        }        
+           
+        }
+        echo" $getdata[0].$getdata[1].$getdata[2]";
+ 
+        fclose($file);       
     }
     /*
         Finish this function to check if username and password 
     from file match that which is passed from the form
     */
-}
-echo "HANDLE THIS PAGE";
+
+// echo "HANDLE THIS PAGE";
 
