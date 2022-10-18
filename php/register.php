@@ -12,9 +12,9 @@ registerUser($username, $email, $password);
 function registerUser($username, $email, $password){
 
     //save data into the file
-    $data=array($username,$email,$password."</br>");
+    $data=array($username,$email,$password);
     $file = fopen('../storage/users.csv','a');
-    
+
     $readFile =fopen('../storage/users.csv','r');
     $checkFile=fgetcsv($readFile);
 

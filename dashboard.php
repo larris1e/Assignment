@@ -1,3 +1,9 @@
+<?php
+session_start();
+// $name=$_POST['uname'];
+$name =$_SESSION['username'] ;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +31,7 @@
   </div>
 </nav>
 <div class="container justify-content-center">
-     <h1 class="">Welcome to Zuri Authentication `USERNAME`</h1>
+     <h1 class="">Welcome to Zuri Authentication <span style="color:red;"><?php echo $name; ?></span></h1>
 </div>
    
 </body>
