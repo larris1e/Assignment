@@ -14,9 +14,18 @@ function registerUser($username, $email, $password){
     //save data into the file
     $data=array($username,$email,$password."</br>");
     $file = fopen('../storage/users.csv','a');
+    
+    $readFile =fopen('../storage/users.csv','r');
+    $checkFile=fgetcsv($readFile);
 
-    if($file){
-        // echo "file opened"."<br>" ."and"."<br>";
+    if($checkFile[1] == $email){
+        echo "
+        <script>
+         alert ('This email has been used already');
+         window.location.href='../forms/register.html';
+        </script>";
+    }
+    else{
         fputcsv($file,$data);
         fclose($file);
         echo "
@@ -24,21 +33,7 @@ function registerUser($username, $email, $password){
          alert ('User Successfully Registered! Proceed to login to your account now');
          window.location.href='../forms/login.html';
         </script>";
-    }
-    else{
-        echo "
-        <script>
-         alert ('Not Registered');
-         window.location.href='../forms/register.html';
-        </script>";
     }   
-    // echo "OKAY";
 }
-// echo "HANDLE THIS PAGE";
-    // echo "
-    // <script>
-    //  alert ('No input from user found');
-    //  window.location.href='../forms/register.html';
-    // </script>";
 
 
