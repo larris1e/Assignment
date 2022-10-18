@@ -14,7 +14,7 @@ function resetPassword($email, $newpassword){
     $checkFile=fgetcsv($readFile);
 
     if ($checkFile[1] == $email){
-        $openFile = fopen('../storage/users.csv','w');
+        $openFile = fopen('../storage/users.csv','a');
         $datas=[$checkFile[0],$email,$newpassword];
         fputcsv($openFile,$datas);
         

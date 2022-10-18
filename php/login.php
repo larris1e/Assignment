@@ -8,8 +8,9 @@ loginUser($email, $password);
 }
 function loginUser($email, $password){
     $file = fopen('../storage/users.csv','r');
-    $getdata=fgetcsv($file); 
+   
         while (!feof($file)){
+            $getdata=fgetcsv($file); 
             if ($getdata[1]==$email && $getdata[2]==$password){
                 $_SESSION['username'] = $getdata[0];
                 echo "
